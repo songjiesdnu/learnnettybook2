@@ -18,7 +18,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
                 new java.util.Date(System.currentTimeMillis()).toString() : "BAD ORDER";
 
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
-        ctx.w                                                                                                                                                                                                                                                                                                                                                                                                                                                                     rite(resp);
+        ctx.write(resp);
     }
 
     @Override
@@ -30,4 +30,18 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable t) {
         ctx.close();
     }
+
+    public static void main(String[] args) throws Exception {
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try{
+                port = Integer.valueOf(args[0]);
+            } catch (NumberFormatException e) {
+                // 采用默认值
+            }
+            new TimeServer().bind(port);
+        }
+    }
 }
+
+
