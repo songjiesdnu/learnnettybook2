@@ -35,6 +35,7 @@ public class TimeClient {
     }
 
     public static void main(String[] args) throws Exception {
+        System.out.println("---" + System.getProperty("line.separator").length() + "---");
         int port = 8080;
         if (args != null && args.length > 0) {
             try {
